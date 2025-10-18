@@ -4,7 +4,7 @@ import Navigation from '../components/Navigation';
 import Breadcrumbs from '../components/Breadcrumbs';
 
 export const metadata = {
-  title: 'Your Restaurant',
+  title: 'Gorrito Burrito',
   description: 'Local, fresh, and fast. Order online.',
 };
 
@@ -40,8 +40,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="content-container">
             <div className="grid cols-2">
               <div>
-                <div>&copy; {new Date().getFullYear()} Your Restaurant</div>
-                <div style={{color:'var(--muted)'}}>123 Main St, Your City, ST</div>
+                <div>&copy; {new Date().getFullYear()} Gorrito Burrito</div>
+                <div style={{color:'var(--muted)'}}>4901 Bonny Oaks Drive, Chattanooga, TN 37416</div>
               </div>
               <div style={{justifySelf:'end',display:'flex',gap:16}}>
                 <a href="/privacy">Privacy</a>
