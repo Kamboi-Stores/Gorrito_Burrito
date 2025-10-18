@@ -12,7 +12,7 @@ import rewards from './schemas/rewards';
 export default defineConfig({
   name: 'default',
   title: 'Restaurant Studio',
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'p4mai67v',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || '1wbgtuq9',
   dataset: process.env.SANITY_STUDIO_DATASET || 'production',
   plugins: [deskTool(), visionTool()],
   schema: {
