@@ -5,8 +5,8 @@ export async function getSiteSettings() {
 import { createClient } from '@sanity/client';
 
 export const client = createClient({
-  projectId: process.env.SANITY_PROJECT_ID || 'p4mai67v',
-  dataset: process.env.SANITY_DATASET || 'production',
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '1wbgtuq9',
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
   apiVersion: '2024-08-01',
   useCdn: true,
   token: process.env.SANITY_API_READ_TOKEN,

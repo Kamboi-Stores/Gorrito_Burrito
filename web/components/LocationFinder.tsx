@@ -33,6 +33,12 @@ export default function LocationFinder() {
       if (!geoRes.ok) throw new Error(geo.error || 'ZIP not found');
       const locs = await getLocations();
       console.log('Available locations:', locs);
+      
+      if (locs.length === 0) {
+        setError('No restaurant locations are currently available. Please check back later or contact us for store information.');
+        return;
+      }
+      
       const locationsWithCoords = locs.filter(loc => loc.lat && loc.lng);
       console.log('Locations with coordinates:', locationsWithCoords);
       
@@ -80,7 +86,7 @@ export default function LocationFinder() {
       if (combinedResults.length > 0) {
         setResults(combinedResults);
       } else {
-        setError('No restaurants found within 20 miles of this ZIP code');
+        setError(`No restaurants found within 20 miles of ZIP code ${zip}. Try a different ZIP code or contact us for the nearest location.`);
       }
     } catch (e: unknown) {
       console.error('LocationFinder error:', e);
@@ -122,14 +128,19 @@ export default function LocationFinder() {
         body: JSON.stringify({ lat, lng }) 
       });
       
+      console.log('Reverse geocoding response status:', reverseGeoRes.status);
+      
       if (!reverseGeoRes.ok) {
-        throw new Error('Unable to determine your ZIP code from location. Please enter a ZIP code instead.');
+        const errorData = await reverseGeoRes.json().catch(() => ({ error: 'Unknown error' }));
+        console.error('Reverse geocoding failed:', errorData);
+        throw new Error(`Unable to determine ZIP code: ${errorData.error || 'Unknown error'}`);
       }
       
       const reverseGeo = await reverseGeoRes.json();
       console.log('Reverse geocoding response:', reverseGeo);
       
       if (!reverseGeo.zip) {
+        console.error('No ZIP code in reverse geocoding response');
         throw new Error('Unable to determine your ZIP code from location. Please enter a ZIP code instead.');
       }
       
@@ -143,7 +154,7 @@ export default function LocationFinder() {
       console.log('Available locations:', locs);
       
       if (locs.length === 0) {
-        setError('No restaurant locations found. Please try entering a ZIP code instead.');
+        setError('No restaurant locations are currently available. Please check back later or contact us for store information.');
         return;
       }
       

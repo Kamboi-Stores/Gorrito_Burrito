@@ -11,7 +11,7 @@ import rewards from './schemas/rewards';
 
 export default defineConfig({
   name: 'default',
-  title: 'Restaurant Studio',
+  title: 'Gorrito Burrito Studio',
   projectId: process.env.SANITY_STUDIO_PROJECT_ID || '1wbgtuq9',
   dataset: process.env.SANITY_STUDIO_DATASET || 'production',
   plugins: [deskTool(), visionTool()],
