@@ -74,7 +74,6 @@ const Navigation = () => {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/menu', label: 'Menu' },
     { href: '/order', label: 'Order' },
     { href: '/locations', label: 'Locations' },
     { href: '/rewards', label: 'Rewards' },
