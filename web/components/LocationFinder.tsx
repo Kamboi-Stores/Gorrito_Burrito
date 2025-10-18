@@ -291,6 +291,9 @@ export default function LocationFinder() {
                 <div className="location-info">
                   <h4>{loc.name}</h4>
                   <p className="address">{loc.address}, {loc.city}, {loc.state} {loc.zip}</p>
+                  {loc.phone && (
+                    <p className="phone">📞 {loc.phone}</p>
+                  )}
                   {loc.distance !== undefined && (
                     <p className="distance">{loc.distance.toFixed(1)} miles away</p>
                   )}
@@ -299,6 +302,11 @@ export default function LocationFinder() {
                   <a className="btn order-btn" href={loc.orderUrl} target="_blank" rel="noreferrer">
                     Order
                   </a>
+                  {loc.phone && (
+                    <a className="btn call-btn" href={`tel:${loc.phone}`}>
+                      Call
+                    </a>
+                  )}
                   <a 
                     className="btn directions-btn" 
                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc.address + ', ' + loc.city + ', ' + loc.state + ' ' + loc.zip)}`} 
