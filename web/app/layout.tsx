@@ -1,5 +1,6 @@
 import './styles/globals.css';
 import React from 'react';
+import Script from 'next/script';
 import Navigation from '../components/Navigation';
 import Breadcrumbs from '../components/Breadcrumbs';
 
@@ -9,24 +10,32 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_ID;
+
   return (
     <html lang="en">
       <head>
-        {/* GA4 (respects cookie banner when configured) */}
-        {process.env.NEXT_PUBLIC_GA4_ID && (
-          <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA4_ID}`}></script>
-            <script dangerouslySetInnerHTML={{__html:`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${process.env.NEXT_PUBLIC_GA4_ID}', { anonymize_ip: true });
-            `}}/>
-          </>
-        )}
         {/* CookieYes placeholder: paste script here when you create it */}
       </head>
       <body>
+        {/* Google Analytics */}
+        {GA_MEASUREMENT_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_MEASUREMENT_ID}');
+              `}
+            </Script>
+          </>
+        )}
+        
         <Navigation />
         <div className="content-container">
           <Breadcrumbs />
