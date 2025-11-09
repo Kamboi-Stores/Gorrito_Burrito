@@ -1,6 +1,7 @@
 import './styles/globals.css';
 import React from 'react';
 import Script from 'next/script';
+import { Analytics } from '@vercel/analytics/react';
 import Navigation from '../components/Navigation';
 import Breadcrumbs from '../components/Breadcrumbs';
 
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </div>
         </footer>
+        <Analytics />
       </body>
     </html>
   );
